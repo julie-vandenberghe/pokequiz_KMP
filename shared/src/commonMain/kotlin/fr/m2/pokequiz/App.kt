@@ -1,11 +1,10 @@
 package fr.m2.pokequiz
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -15,35 +14,31 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.painterResource
-
-import pokequiz.shared.generated.resources.Res
-import pokequiz.shared.generated.resources.compose_multiplatform
+import androidx.compose.ui.unit.dp
 
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
+        var count by remember { mutableIntStateOf(0) }
         Column(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
+                .fillMaxSize()
+                .background(Color(0xFFFFCB05))
                 .safeContentPadding()
-                .fillMaxSize(),
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(
+                16.dp, Alignment.CenterVertically
+            ),
         ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Clique-moi!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth().background(Color(0xFFFFCB05)),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
+            Text(
+                "Bienvenue dans PokéQuiz",
+                style = MaterialTheme.typography.headlineMedium,
+            )
+            Text(Greeting().greet())
+            Button(onClick = { count++ }) {
+                Text("Compteur : $count")
             }
         }
     }
