@@ -86,15 +86,16 @@ Comme l'état est stocké avec remember, la rotation recrée l'Activity, donc l'
 
 8. Dépendances : affichez l'arbre de dépendances runtime de la cible desktop du module partagé : ./gradlew :shared:dependencies --configuration jvmRuntimeClasspath. Quelle bibliothèque skiko apparaît? Pourquoi ?
 ![skiko.png](skiko.png)
-> Skiko est le binding Kotlin de Skia, le moteur de rendu 2D. Compose Multiplatform dessine lui-même ses composants avec Skia au lieu d’utiliser les widgets natifs. Sur Desktop, il faut donc cette bibliothèque native, d’où l'appel de skiko dans l’arbre.
+> Skiko est le binding Kotlin de Skia, le moteur de rendu 2D. Compose Multiplatform dessine lui-même ses composants avec Skia au lieu d'utiliser les widgets natifs. Sur Desktop, il faut donc cette bibliothèque native, d’où l'appel de skiko dans l'arbre.
 
 9. Preflight checks : explorez les réglages de l'outil (relance, détails). Sur Mac, désactivez puis réactivez une vérification iOS pour comprendre son rôle.
 > ![preflight-check.png](preflight-check.png)
 > Dans les settings du preflight checks, on ne peut pas désactiver la vérification iOS seule, mais tout l’ensemble des Preflight Checks (case « Enable Project Environment Preflight Checks »). 
-> J’ai donc observé le rôle de la vérification Xcode autrement : au départ Xcode était désinstallé sur ma machine, la coche était rouge et dnas les settings j'avais le message "You have to select a valid Xcode installation". Après installation et sélection de Xcode 26.5 dans Settings > Tools > Xcode, la coche est passée au vert. 
+> J'ai donc observé le rôle de la vérification Xcode autrement : au départ Xcode était désinstallé sur ma machine, la coche était rouge et dnas les settings j'avais le message "You have to select a valid Xcode installation". Après installation et sélection de Xcode 26.5 dans Settings > Tools > Xcode, la coche est passée au vert. 
 > J'ai ainsi pu comprendre que l'étape dans le preflight sert à vérifier que Xcode est installé et correctement sélectionné, ce qui est nécessaire pour compiler et lancer la cible iOS ensuite.
 
 10. Lancez l'app sur un simulateur et comparez le rendu du bouton avec Android
 > Non réalisé. Mon Mac est un Mac Intel (x86_64). Après avoir téléchargé et installé Xcode et le simulateur iOS, j'ai rajouté dans shared/build.gradle.kts la cible "iosX64" mais Gradle m'affichait alors l’erreur "Unresolved platforms: [iosX64]". En regardant les release notes (https://kotlinlang.org/docs/multiplatform/whats-new-compose-111.htm), j'ai vu que Compose Multiplatform ne supporte plus cette cible depuis la version 1.11... Je n’ai donc pas pu comparer le rendu du bouton avec Android.
-En théorie, il serait identique car comme vu à la question 8, Compose dessine ses composants avec Skia, sans utiliser de widgets natifs.
+> En théorie, il serait identique car comme vu à la question 8, Compose dessine ses composants avec Skia, sans utiliser de widgets natifs.
+> ![erreurx64.png](erreurx64.png)
 
