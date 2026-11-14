@@ -1,4 +1,4 @@
-# Réponse aux questions du lab1
+# Réponses aux questions du lab1
 
 ## Étape 5 : exploration de l'arborescence
 1. Combien de modules Gradle contient le projet ? Lesquels ? Où sont-ils déclarés ?
