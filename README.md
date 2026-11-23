@@ -1,35 +1,39 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
+# PokéQuiz
 
-* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+Projet de cours (M2) en Kotlin Multiplatform. PokéQuiz est un quiz sur les Pokémon : le joueur doit retrouver le nom d'un Pokémon. Une partie compte 5 questions. Le score dépend de la réponse, de l'utilisation d'un indice et du temps de réponse.
 
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Cibles : Android, iOS et Desktop (JVM). 
+Package : fr.m2.pokequiz.
 
-### Running the apps
+## Avancement
 
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
+| Lab | Contenu | Réponses aux questions | Tag associé |
+| --- | --- | --- |-------------|
+| Lab 1 | Environnement, projet et premier lancement | [docs/lab01.md](./docs/lab01.md) | lab01       |
+| Lab 2 | Domaine du quiz (moteur, score, vérification des réponses) et tests | [REPONSES-lab02.md](./REPONSES-lab02.md) | lab02       |
 
-- Android app: `./gradlew :androidApp:assembleDebug`
-- Desktop app:
-  - Hot reload: `./gradlew :desktopApp:hotRun --auto`
-  - Standard run: `./gradlew :desktopApp:run`
-- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+## Structure du projet
 
-### Running tests
+* [/androidApp](./androidApp) contient l'application Android.
+* [/desktopApp](./desktopApp) contient l'application Desktop (JVM).
+* [/iosApp](./iosApp/iosApp) contient l'application iOS. 
+* [/shared](./shared/src) contient le code partagé entre les applications :
+  - [commonMain](./shared/src/commonMain/kotlin) : code commun à toutes les cibles (domaine du quiz et UI).
+  - [commonTest](./shared/src/commonTest/kotlin) : tests communs, exécutés sur chaque cible.
+  - [androidMain](./shared/src/androidMain/kotlin), [jvmMain](./shared/src/jvmMain/kotlin) et [iosMain](./shared/src/iosMain/kotlin) : code propre à chaque plateforme (les actual de expect).
 
-Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
+## Lancer les applications
 
-- Android tests: `./gradlew :shared:testAndroidHostTest`
-- Desktop tests: `./gradlew :shared:jvmTest`
-- iOS tests: `./gradlew :shared:iosSimulatorArm64Test`
+Utilise les run configurations de l'IDE. Tu peux aussi utiliser ces commandes :
 
----
+- Android : `./gradlew :androidApp:assembleDebug`
+- Desktop :
+  - Hot reload : `./gradlew :desktopApp:hotRun --auto`
+  - Lancement standard : `./gradlew :desktopApp:run`
+- iOS : ouvrir le dossier [/iosApp](./iosApp) dans Xcode et lancer depuis Xcode.
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Lancer les tests
+
+- Android : `./gradlew :shared:testAndroidHostTest`
+- Desktop : `./gradlew :shared:jvmTest`
+- iOS : `./gradlew :shared:iosSimulatorArm64Test`
