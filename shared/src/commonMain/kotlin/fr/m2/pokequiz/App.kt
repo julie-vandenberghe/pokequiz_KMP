@@ -18,30 +18,21 @@ import androidx.compose.ui.unit.dp
 import fr.m2.pokequiz.ui.theme.PokeQuizTheme
 import fr.m2.pokequiz.resources.*
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.layout.size
+import fr.m2.pokequiz.data.FakePokemons
+import fr.m2.pokequiz.ui.PokemonImage
 @Composable
 @Preview
 fun App() {
     PokeQuizTheme {
-        var count by remember { mutableIntStateOf(0) }
+        var gray by remember { mutableStateOf(true) }
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0xFFFFCB05))
-                .safeContentPadding()
-                .padding(16.dp),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(
-                16.dp, Alignment.CenterVertically
-            ),
+            verticalArrangement = Arrangement.Center,
         ) {
-            Text(
-                stringResource(Res.string.app_name),
-                style = MaterialTheme.typography.headlineMedium,
-            )
-            Text(Greeting().greet())
-            Button(onClick = { count++ }) {
-                Text("Compteur : $count")
-            }
+            PokemonImage(FakePokemons.pikachu.imageUrl, grayscale = gray, modifier = Modifier.size(240.dp))
+            Button(onClick = { gray = !gray }) { Text("Basculer") }
         }
     }
 }
