@@ -16,7 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fr.m2.pokequiz.ui.theme.PokeQuizTheme
-
+import fr.m2.pokequiz.resources.*
+import org.jetbrains.compose.resources.stringResource
 @Composable
 @Preview
 fun App() {
@@ -34,7 +35,7 @@ fun App() {
             ),
         ) {
             Text(
-                "Bienvenue dans PokéQuiz",
+                stringResource(Res.string.app_name),
                 style = MaterialTheme.typography.headlineMedium,
             )
             Text(Greeting().greet())
